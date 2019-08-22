@@ -1,0 +1,49 @@
+name:                finite-automata
+version:             0.1.0.0
+github:              "rwillrich/finite-automata"
+license:             BSD3
+author:              "Rodrigo Willrich"
+maintainer:          "rodrigo.willrich@hotmail.com"
+copyright:           "2019 Rodrigo Willrich"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+synopsis:            Finite automata implementation
+category:            Computer Science
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/rwillrich/finite-automata#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- containers
+
+library:
+  source-dirs: src
+
+executables:
+  finite-automata-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - finite-automata
+
+tests:
+  finite-automata-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - finite-automata
