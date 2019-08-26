@@ -3,6 +3,8 @@
 
 module DFA
   ( DFA(..)
+  , alphabet
+  , states
   , transition
   , testDFA
   ) where
@@ -20,6 +22,12 @@ data DFA state input where
     , finalStates :: Set state
     }
     -> DFA state input
+
+alphabet :: DFA state input -> Set input
+alphabet (DFA { transitionTable }) = Map.foldl' (\a b -> Set.union a (Map.keysSet b)) Set.empty transitionTable
+
+states :: DFA state input -> Set state
+states (DFA { transitionTable }) = Map.keysSet transitionTable
 
 transition :: DFA state input -> state -> input -> Maybe state
 transition (DFA { transitionTable }) state input =

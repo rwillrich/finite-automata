@@ -3,6 +3,8 @@
 
 module NFA
   ( NFA(..)
+  , alphabet
+  , states
   , testNFA
   ) where
 
@@ -20,6 +22,12 @@ data NFA state input where
     , finalStates :: Set state
     }
     -> NFA state input
+
+alphabet :: NFA state input -> Set input
+alphabet (NFA { transitionTable }) = Map.foldl' (\a b -> Set.union a (Map.keysSet b)) Set.empty transitionTable
+
+states :: NFA state input -> Set state
+states (NFA { transitionTable }) = Map.keysSet transitionTable
 
 transition :: NFA state input -> state -> input -> Maybe (Set state)
 transition (NFA { transitionTable }) state input =

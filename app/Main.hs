@@ -1,7 +1,9 @@
 module Main where
 
 import DFA (DFA(..), testDFA)
+import qualified DFA
 import NFA (NFA(..), testNFA)
+import qualified NFA
 
 import Control.Monad (forM_)
 import Data.Map (Map)
@@ -64,9 +66,13 @@ main = do
   let inputs = ["aa", "bb", "aba", "abaaba", "babbab"]
   putStrLn "DFAs"
   let dfa = DFA transitionTableDFA Q0 (Set.fromList [Q3])
+  print $ DFA.alphabet dfa
+  print $ DFA.states dfa
   forM_ inputs $ \input ->
     print (input, testDFA dfa input)
   putStrLn "NFAs"
   let nfa = NFA transitionTableNFA Q0 (Set.fromList [Q3])
+  print $ NFA.alphabet nfa
+  print $ NFA.states nfa
   forM_ inputs $ \input ->
     print (input, testNFA nfa input)
